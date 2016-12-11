@@ -1,0 +1,8 @@
+/vendor
+/logs
+composer.phar
+composer.lock
+/data/cache
+.DS_Store
+Thumbs.db
+cfg_mobilecms.cn

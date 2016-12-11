@@ -5,4 +5,4 @@ composer.lock
 /data/cache
 .DS_Store
 Thumbs.db
-cfg_mobilecms.cn
+conf/cfg_mobilecms.cn.php

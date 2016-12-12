@@ -1,15 +1,9 @@
 <?php
 /**
-
- */
- *
  * 代理器
  * 负责与框架之间的接口设置与路由配置
  *
-
-
-
- * @version $Id: router.php 128 2012-04-16 16:05:14Z gimoo $
+ * @version $Id$
  */
 
 require_once('config.php');//基本配置

@@ -2,7 +2,6 @@
 /logs
 composer.phar
 composer.lock
-/data/cache
+/data/cache/*
 .DS_Store
 Thumbs.db
-conf/cfg_mobilecms.cn.php

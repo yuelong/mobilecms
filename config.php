@@ -97,4 +97,3 @@ if (!is_file($_cfg['sys_rootdir'] . 'conf' . FD_DS . 'cfg_' . $_domain . '.php')
 }
 include($_cfg['sys_rootdir'] . 'conf' . FD_DS . 'cfg_' . $_domain . '.php');
 //------------------------------------------------------
-?>

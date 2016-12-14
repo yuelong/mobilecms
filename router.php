@@ -118,7 +118,7 @@ class Router extends Fend
                 $ghead[$k].="<link href=\"{$this->dm['img']}{$str}\" rel=\"stylesheet\" type=\"text/css\" />\n";
                 break;
             case 'title':
-                $ghead[$k] = (empty($str) ? null : $str . '_' ) . $ghead[$k];
+                $ghead[$k] = (empty($str) ? null : $str ) . $ghead[$k];
                 break;
             default:
                 $ghead[$k] = $str;

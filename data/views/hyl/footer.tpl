@@ -1,6 +1,6 @@
 <footer class="footer">
-    <p>&copy; 2016 <a href="http://www.mobilecms.cn" target="_blank">MobileCMS.cn</a> Licensed under <a
-            href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a></p>
+    <p>&copy; 2016 <a href="/" target="_blank">{$meta.sitename}</a>. Powered by <a href="http://www.mobilecms.cn" target="_blank">MobileCMS</a><br>
+        <a href="http://www.miibeian.gov.cn/" target="_blank">吉ICP备16004551号</a> | <script src="https://s95.cnzz.com/z_stat.php?id=1259972324&web_id=1259972324" language="JavaScript"></script></p>
 </footer>
 
 <!--[if lt IE 9]>

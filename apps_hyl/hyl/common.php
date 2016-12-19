@@ -14,6 +14,7 @@ class Common extends Router
 {
 
     protected $uid = 0; //当前登录用户UID
+    protected $lib, $act;
 
     public function Init()
     {
@@ -21,7 +22,17 @@ class Common extends Router
         if ($this->reg['login']) {
             $this->uid = $this->reg['uid'];
         }
-        self::gHead('title', '回忆了么(HYL.ME)');
+        $this->lib = isset($this->url[2]) ? $this->url[2] : '';
+        $this->act = isset($this->url[3]) ? $this->url[3] : '';
+        self::regVar(Conf_Hyl::$header_menu, 'tmy_header_menu');
+        self::regVar(Conf_Hyl::$header_menu_more, 'tmy_header_menu_more');
+        self::regVar(Conf_Hyl::$footer_menu, 'tmy_footer_menu');
+        self::regVar($this->lib, 'tmy_lib');
+        self::regVar($this->act, 'tmy_act');
+        $menu = array_merge(Conf_Hyl::$header_menu, Conf_Hyl::$header_menu_more, Conf_Hyl::$footer_menu);
+        $title = isset($menu["{$this->lib}_{$this->act}"]['name']) ? $menu["{$this->lib}_{$this->act}"]['name'] : '';
+        self::gHead('sitename', '回忆了么(HYL.ME)');
+        self::gHead('title', $title);
         self::gHead('slogan', '回忆点滴，提升技能');
         self::gHead('keyw', '回忆了么,回忆,亲子平台,亲子,个人提升,技术提升,免费,开源,移动,高效');
         self::gHead('desc', '随着碎片化阅读越来越多,浪费时间也越来越多,这个平台的想法就是让你把碎片化阅读整合起来,形成自己的体系和网站,如果用来记录宝宝的回忆,就成了很好的亲子平台');

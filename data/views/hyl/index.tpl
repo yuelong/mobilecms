@@ -1,4 +1,4 @@
-{include file="hyl/header.tpl" fjs="js/form.js" fcss="css/index.css"}
+{include file="hyl/header.tpl" fjs="js/form.js" fcss="css/hyl/index.css"}
 
 <div class="get">
     <div class="am-g">

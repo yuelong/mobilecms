@@ -2,18 +2,19 @@
 <html>
     <head lang="en">
         <meta charset="UTF-8">
-        <title>{$meta.title} - Powered by MobileCMS</title>
+        <title>{if $meta.title}{$meta.title} - {/if}{$meta.sitename} - Powered by MobileCMS</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="format-detection" content="telephone=no">
         <meta name="renderer" content="webkit">
         <meta http-equiv="Cache-Control" content="no-siteapp">
-        {if $meta.keyw}<meta name="keywords" content="{$meta.keyw}">
+        {if $meta.keyw}<meta name="keywords" content="{if $meta.title}{$meta.title},{/if}{$meta.keyw}">
         {/if}
-        {if $meta.desc}<meta name="Description" content="{$meta.desc}">
+        {if $meta.desc}<meta name="Description" content="{if $meta.title}{$meta.title},{/if}{$meta.desc}">
         {/if}
         <link rel="alternate icon" type="image/png" href="{$smarty.fend.dm.img}i/favicon.png">
         <link rel="stylesheet" href="{$smarty.fend.dm.img}css/amazeui.min.css">
+        <link rel="stylesheet" href="{$smarty.fend.dm.img}css/hyl/common.css">
         {if $fcss}
             {if is_array($fcss)}
                 {foreach item=v from=$fcss}
@@ -28,7 +29,7 @@
         <header class="am-topbar am-topbar-fixed-top">
             <div class="am-container">
                 <h1 class="am-topbar-brand">
-                    <a href="/">回忆了么(HYL.ME)</a>
+                    <a href="/">{$meta.sitename}</a>
                 </h1>
                 {literal}
                     <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only"
@@ -37,22 +38,21 @@
                 {/literal}
                 <div class="am-collapse am-topbar-collapse" id="collapse-head">
                     <ul class="am-nav am-nav-pills am-topbar-nav">
-                        {*<li class="am-active"><a href="/">首页</a></li>*}
-                        <li><a href="/doc/how">开始使用</a></li>
-                        {*<li><a href="/case">解决方案</a></li>*}
-                        {*<li><a href="/buy">产品购买</a></li>*}
-                        <li><a href="/hot/members">热门账号</a></li>
-                        <li><a href="/hot/articles">热门文章</a></li>
-                        <li class="am-dropdown" data-am-dropdown>
+                        {foreach from=$tmy_header_menu key=key item=menu}
+                            <li{if $tmy_lib==$menu['lib'] && $tmy_act==$menu['act']} class="am-active"{/if}><a href="/{$menu.lib}/{$menu.act}">{$menu.name}</a></li>
+                            {/foreach}
+                            {if $tmy_header_menu_more}
+                            <li class="am-dropdown" data-am-dropdown>
                             <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
                                 更多 <span class="am-icon-caret-down"></span>
                             </a>
-                            <ul class="am-dropdown-content">
-                                <li><a href="/hot/books">热门图书</a></li>
-                                <li><a href="/hot/mps">热门公众号</a></li>
-                                <li><a href="/hot/children">亲子互动</a></li>
-                            </ul>
+                                <ul class="am-dropdown-content">
+                                    {foreach from=$tmy_header_menu_more key=key item=menu}
+                                        <li{if $tmy_lib==$menu['lib'] && $tmy_act==$menu['act']} class="am-active"{/if}><a href="/{$menu.lib}/{$menu.act}">{$menu.name}</a></li>
+                                        {/foreach}
+                                </ul>
                         </li>
+                        {/if}
                     </ul>
 
                     <div class="am-topbar-right">

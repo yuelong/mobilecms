@@ -1,8 +1,6 @@
 <?php
 
 /**
-
- *
  * DB查询基类
  * @version $Id$
  * */
@@ -15,6 +13,21 @@ class Db_Init extends Fend
     protected $_where = null;
     // 字段
     protected $_field = '*';
+    // 表
+    protected $_table = null;
+
+    /**
+     * 设置表名字
+     * @param type $table
+     * @return \Db_Init
+     */
+    public function table($table)
+    {
+        if (!empty($table)) {
+            $this->_table = $table;
+        }
+        return $this;
+    }
 
     /**
      * 设置查询字段
@@ -35,7 +48,7 @@ class Db_Init extends Fend
      * @param  str $name   排序字段
      * @return void
      * */
-    public function setOrderDesc($name)
+    public function desc($name)
     {
         if (func_num_args() <= 0) {
             if (!$this->_order) {
@@ -53,6 +66,7 @@ class Db_Init extends Fend
                 }
             }
         }
+        return $this;
     }
 
     /**
@@ -61,7 +75,7 @@ class Db_Init extends Fend
      * @param  str $name   排序字段
      * @return void
      * */
-    public function setOrderAsc($name)
+    public function asc($name)
     {
         if (func_num_args() <= 0) {
             if (!$this->_order) {
@@ -79,6 +93,7 @@ class Db_Init extends Fend
                 }
             }
         }
+        return $this;
     }
 
     /**
@@ -88,7 +103,7 @@ class Db_Init extends Fend
      * @param  str $type   排序方法
      * @return void
      * */
-    public function setOrder($name, $type = 'DESC')
+    public function order($name, $type = 'DESC')
     {
         $type = strtoupper($type);
 
@@ -97,6 +112,7 @@ class Db_Init extends Fend
         } elseif ($type == 'ASC') {
             self::setOrderAsc($name);
         }
+        return $this;
     }
 
     /**
@@ -107,7 +123,7 @@ class Db_Init extends Fend
      * @param  str $type   排序方式 0=and 1=or
      * @return void
      * */
-    public function setWhere($name, $value, $type = 0)
+    public function where($name, $value, $type = 0)
     {
         !$this->_where && $this->_where = 'WHERE 1';
 
@@ -130,6 +146,7 @@ class Db_Init extends Fend
             $value = mysql_escape_string($value);
             $this->_where .= " {$name}='{$value}'";
         }
+        return $this;
     }
 
     /**
@@ -140,7 +157,7 @@ class Db_Init extends Fend
      * @param  str $type   排序方式 0=and 1=or
      * @return void
      * */
-    public function setLike($name, $value, $type = 0)
+    public function like($name, $value, $type = 0)
     {
         !$this->_where && $this->_where = 'WHERE 1';
 
@@ -153,6 +170,7 @@ class Db_Init extends Fend
         // 配置查询
         $value = mysql_escape_string($value);
         $this->_where .= " {$name} LIKE '{$value}'";
+        return $this;
     }
 
     /**
@@ -163,7 +181,7 @@ class Db_Init extends Fend
      * @param  str $type   排序方式 0=and 1=or
      * @return void
      * */
-    public function setFind($name, $value, $type = 0)
+    public function find($name, $value, $type = 0)
     {
         !$this->_where && $this->_where = 'WHERE 1';
 
@@ -180,6 +198,7 @@ class Db_Init extends Fend
             $value = mysql_escape_string($value);
             $this->_where .= " FIND_IN_SET('{$value}',{$name})";
         }
+        return $this;
     }
 
     /**
@@ -190,7 +209,7 @@ class Db_Init extends Fend
      * @param  str $type   排序方式 0=and 1=or
      * @return void
      * */
-    public function setOther($sql, $type = 0)
+    public function other($sql, $type = 0)
     {
         !$this->_where && $this->_where = 'WHERE 1';
 
@@ -201,6 +220,7 @@ class Db_Init extends Fend
         }
 
         $this->_where .= ' ' . $sql;
+        return $this;
     }
 
     /**
@@ -212,6 +232,7 @@ class Db_Init extends Fend
     public function reSet()
     {
         $this->_field = '*';
+        $this->_table = null;
         $this->_where = null;
         $this->_order = null;
         $this->_group = null;

@@ -238,4 +238,56 @@ class Db_Init extends Fend
         $this->_group = null;
     }
 
+    /**
+     * 设置排序-降序
+     *
+     * @param  str $name   排序字段
+     * @return void
+     */
+    public function setOrderDesc($name)
+    {
+        if (func_num_args() <= 0) {
+            if (!$this->_order) {
+                $this->_order = "ORDER BY {$name} DESC";
+            } else {
+                $this->_order .= ",{$name} DESC";
+            }
+        } else {
+            $args = func_get_args();
+            foreach ($args as $value) {
+                if (!$this->_order) {
+                    $this->_order = "ORDER BY {$value} DESC";
+                } else {
+                    $this->_order .= ",{$value} DESC";
+                }
+            }
+        }
+    }
+
+    /**
+     * 设置排序-升序
+     *
+     * @param  str $name   排序字段
+     * @return void
+     */
+    public function setOrderAsc($name)
+    {
+        if (func_num_args() <= 0) {
+            if (!$this->_order) {
+                $this->_order = "ORDER BY {$name} ASC";
+            } else {
+                $this->_order .= ",{$name} ASC";
+            }
+        } else {
+            $args = func_get_args();
+            foreach ($args as $value) {
+                if (!$this->_order) {
+                    $this->_order = "ORDER BY {$value} ASC";
+                } else {
+                    $this->_order .= ",{$value} ASC";
+                }
+            }
+        }
+    }
+
 }

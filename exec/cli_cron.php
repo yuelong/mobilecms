@@ -30,6 +30,14 @@ if (php_sapi_name() == 'cli') {
             Caiji_Hgys_Write::Factory()->addClick();
             break;
 
+        //php cli_cron.php mobilecms.cn -lofter2typecho '/Applications/XAMPP/xamppfiles/htdocs/mobilecms.cn/data/cache/LOFTER-2046-2016.12.31.xml'
+        case '-lofter2typecho':
+            $file = @$_SERVER['argv'][3];
+            if ($file) {
+                Misc_Lofter_Typecho::Factory()->ReadXml($file);
+            } else {
+                echo 'no file.' . PHP_EOL;
+            }
         default:
             die('no');
             break;
